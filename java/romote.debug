@@ -1,0 +1,15 @@
+Win系统 
+在tomcat目录下的bin目录中新建debug.bat,编辑内容如下 
+set JPDA_ADDRESS=8000 
+set JPAD_TRANSPORT=dt_socket 
+SET CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8899 
+startup 
+双击debug.bat 
+
+Linux 系统 
+startup.sh 中的最后一行 exec "$PRGDIR"/"$EXEXUTABLE" start "$@"中的start修改成 
+jpda start ，默认的调试端口是8000 ，可以在catalina.sh 文件中设置JPDA_APPDESS=8000 
+使用startup.sh 或者./catalina.sh jpda start 启动tomcat 
+
+jar
+java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -jar app.jar

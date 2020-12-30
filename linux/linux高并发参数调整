@@ -1,0 +1,5 @@
+1. 参数调整
+1）sysctl -a | grep somaxconn
+echo "net.core.somaxconn = 4096" >> /etc/sysctl.conf
+sysctl -p
+重启应用，敲ss -tanl | grep appPort 验证，第三列变成4096说明生效。

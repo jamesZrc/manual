@@ -1,0 +1,18 @@
+Dump文件的生成
+1. jmap命令生成： jmap -dump:live,file=dump_001.bin PID
+2.Full GC生成：java -jar test.jar  -XX:+HeapDumpBeforeFullGC -XX:+HeapDumpAfterFullGC -XX:HeapDumpPath=PATH
+HeapDumpBeforeFullGC ：实现在Full GC前dump。
+HeapDumpAfterFullGC ：实现在Full GC后dump。
+：设置Dump保存的路径
+3.使用jvisualvm生成
+将dump文件装入jvisualvm工具，查看类=》实例数。实例数GC后仍有大量存在，表明这些实例无法回收，存在泄漏的可能。
+
+GC日志输出
+optinos加入 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
+
+线程查看
+ 进程内部线程:  top -H -p pid
+ 线程调用栈：  jstack pid  
+
+dump查看
+jhat -J-Xmx4096m D:/download/dump

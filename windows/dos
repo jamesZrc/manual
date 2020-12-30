@@ -1,0 +1,8 @@
+1、关闭端口
+netstat  -aon|findstr  "8080"
+tasklist|findstr "PID号"
+taskkill /f /t /im 程序名
+taskkill -f -pid 3824
+
+2、kill nginx
+taskkill /F /IM "nginx.exe"

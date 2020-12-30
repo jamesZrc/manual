@@ -1,0 +1,22 @@
+1.端口占用   lsof -i :port
+2.杀死进程 kill - 9 pid
+3.端口占用 端口占用进程
+lsof -i :port  | sed -n '2p;' | awk '{print $2}' | xargs kill -9
+centos: netstat -lnpt
+4. 测试端口   nc -z -v localhost 1-10000
+5 . /bin/bash^M: bad interpreter   进入命令行模式： set ff=unix
+6. ssh debug
+1. /usr/sbin/sshd -d -p 2222 
+2. ssh -vv localhost -p 2222
+7.设置代理: ssh -N -f -L 127.0.0.1:3306:139.129.195.31:3306  -p 36000 root@139.129.195.31
+   动态代理: ssh -o ServerAliveInterval=20 -g -Nf -D 1080 -p 36000 root@139.129.195.31
+8.TCP丢包日志  crontab定时每2分钟输出
+  	*/2 * * * * echo "=====================";date; ss -tanl | grep 81; netstat -st | egrep -i 		"drop|reject|overflowed|listen|filter" >> send.log
+
+9.centos开机启动
+  echo '需要启动的脚本'  >> /etc/rc.d/rc.local
+  chmod +x /etc/rc.d/rc.local
+
+10.端口占用 netstat -tunlp|grep port
+
+11.线程数查看： top -H -p {pid}
